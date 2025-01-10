@@ -174,7 +174,7 @@
 <script>
   if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
-        navigator.serviceWorker.register('flutter_service_worker.js?v=3451324818');
+        navigator.serviceWorker.register('flutter_service_worker.js?v=3507283575');
       });
     }
     window.addEventListener('load', function() {
@@ -197,6 +197,37 @@
         }, 200);
       });
     });
+
+
+
+    function receivePdf(base64String) {
+      console.log("Recibiendo pdf")
+      // return;
+  // Convertir la cadena base64 a un Blob
+  const byteCharacters = atob(base64String);
+  const byteNumbers = new Array(byteCharacters.length);
+  for (let i = 0; i < byteCharacters.length; i++) {
+    byteNumbers[i] = byteCharacters.charCodeAt(i);
+  }
+  const byteArray = new Uint8Array(byteNumbers);
+  const blob = new Blob([byteArray], { type: 'application/pdf' });
+
+  // Crear una URL para el Blob
+  const blobUrl = URL.createObjectURL(blob);
+
+  // Crear un iframe oculto
+  const iframe = document.createElement('iframe');
+  iframe.style.display = 'none';
+  iframe.src = blobUrl;
+  
+  // Agregar el iframe al DOM
+  document.body.appendChild(iframe);
+
+  // Esperar a que el iframe cargue y luego imprimir
+  iframe.onload = function () {
+    console.log("Index.html iimprimiendo pdf")
+    iframe.contentWindow.print();};
+}
 </script>
   <script>
     // importScripts('https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js');
@@ -273,6 +304,6 @@ const analytics = getAnalytics(app);
   </script>
   <script defer src="sql-wasm.js"></script>
 
-  <script src="main.dart.js?15.0.153" type="application/javascript"></script>
+  <script src="main.dart.js?15.0.154" type="application/javascript"></script>
 </body>
 </html>
