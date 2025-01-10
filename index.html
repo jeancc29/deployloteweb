@@ -174,7 +174,7 @@
 <script>
   if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
-        navigator.serviceWorker.register('flutter_service_worker.js?v=3507283575');
+        navigator.serviceWorker.register('flutter_service_worker.js?v=3724061958');
       });
     }
     window.addEventListener('load', function() {
@@ -227,6 +227,36 @@
   iframe.onload = function () {
     console.log("Index.html iimprimiendo pdf")
     iframe.contentWindow.print();};
+}
+
+function receiveImage(base64String) {
+  // Crear una URL base64 para la imagen
+  console.log("Recibiendo imagen")
+  const imageUrl = `data:image/png;base64,${base64String}`;
+
+  // Crear un iframe oculto
+  const iframe = document.createElement('iframe');
+  iframe.style.display = 'none';
+
+  // Agregar el iframe al DOM
+  document.body.appendChild(iframe);
+
+  // Esperar a que el iframe cargue la imagen
+  iframe.onload = function () {
+    console.log("Index.html iimprimiendo Imagen")
+    iframe.contentWindow.print();
+    console.log("Index.html Imagen impresa")
+    // document.body.removeChild(iframe); // Eliminar el iframe después de imprimir
+  };
+
+  // Escribir el contenido HTML con la imagen en el iframe
+  iframe.srcdoc = `
+    <!DOCTYPE html>
+    <html>
+      <body style="margin: 0; padding: 0;">
+        <img src="${imageUrl}" style="width: 100%; height: auto;" />
+      </body>
+    </html>`;
 }
 </script>
   <script>
@@ -304,6 +334,6 @@ const analytics = getAnalytics(app);
   </script>
   <script defer src="sql-wasm.js"></script>
 
-  <script src="main.dart.js?15.0.154" type="application/javascript"></script>
+  <script src="main.dart.js?15.0.155" type="application/javascript"></script>
 </body>
 </html>
