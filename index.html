@@ -174,7 +174,7 @@
 <script>
   if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
-        navigator.serviceWorker.register('flutter_service_worker.js?v=3724061958');
+        navigator.serviceWorker.register('flutter_service_worker.js?v=1130766502');
       });
     }
     window.addEventListener('load', function() {
@@ -234,9 +234,18 @@ function receiveImage(base64String) {
   console.log("Recibiendo imagen")
   const imageUrl = `data:image/png;base64,${base64String}`;
 
+  // buscar iframe por id y eliminarlo si existe
+  var iframeExistente = document.getElementById("iframe-imagen");
+  if (iframeExistente) {
+    document.body.removeChild(iframeExistente);
+  }
+
   // Crear un iframe oculto
   const iframe = document.createElement('iframe');
   iframe.style.display = 'none';
+
+  // id del iframe
+  iframe.id = "iframe-imagen";
 
   // Agregar el iframe al DOM
   document.body.appendChild(iframe);
@@ -332,8 +341,8 @@ const analytics = getAnalytics(app);
       });
     }
   </script>
-  <script defer src="sql-wasm.js"></script>
+  <script defer src="sql-wasm.js?15.0.156"></script>
 
-  <script src="main.dart.js?15.0.155" type="application/javascript"></script>
+  <script src="main.dart.js" type="application/javascript"></script>
 </body>
 </html>
