@@ -1,11 +1,348 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    Fore more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+  -->
+  <base href="/">
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Sistema de loterias.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="loterias">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo.png"/>
+
+  <title>loterias</title>
+  <link rel="manifest" href="manifest.json">
+
+  <style>
+    div.image {
+      width: 30%;
+      height: 30%;
+      border-radius: 20%;
+      /* content:url('assets/assets/images/loterias_dominicanas_sin_letras_editada.png'); */
+      background-image:url('assets/assets/images/loterias_dominicanas_sin_letras_editada.png');
+    }
+
+    .content{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      position: absolute;
+      top: 40%;
+      left: 45%;
+      /* width: 200px; */
+      width: 14%;
+      height: 160px;
+    }
+
+    #imgLoterias{
+      top: 0%; left: 35%; display: flex; position: absolute; border-radius: 15px;
+    }
+
+
+    .loading-box{
+    /* position: relative; */
+    /* display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      position: absolute;
+      top: 45%;
+      left: 45%; */
+      
+      position: relative;
+    bottom: 0%;
+    width: 100%;
+    height: 6px;
+    border-radius: 50px;
+    border: 2px solid #ededed;
+    overflow: hidden;
+}
+
+
+.loader{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 50px;
+    /* background: linear-gradient(45deg, #b6b5ff, #df1f75); */
+    background: linear-gradient(45deg, #b6b5ff, #df1f75);
+    left: 0%;
+}
+
+.loader{
+    left: -100%;
+    animation: load 2s linear infinite;
+}
+
+@keyframes load{
+    0%{
+        left: -100%;
+    }
+    100%{
+        left: 100%;
+    }
+}
+
+
+
+@media (max-width:750px){
+      .content {
+        width: 30%;
+        left: 35%;
+      }
+
+      .loading-box{
+        height: 3px;
+        border: 1px solid #ededed;
+      }
+
+      #imgLoterias{
+        left: 35%;
+      }
+    }
+
+
+    @media (max-width:520px){
+      #imgLoterias{
+        left: 30%;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Hola klk mi pana</h1>
+
+  <div id="loading">
+    <style>
+      body {
+        inset: 0; overflow: hidden;
+        margin: 0; padding: 0;
+        position: fixed;
+      }
+      #loading {
+        align-items: center;
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        width: 100%;
+      }
+      #loading img {
+        animation: 1s ease-in-out 0s infinite alternate breathe;
+        opacity: .66;
+        transition: opacity .4s;
+      }
+      #loading.main_done img {
+        opacity: 1;
+      }
+      #loading.init_done img {
+        animation: .33s ease-in-out 0s 1 forwards zooooom;
+        opacity: .05;
+      }
+      @keyframes breathe { from { transform: scale(1) } to { transform: scale(0.95)}}
+      @keyframes zooooom { from { transform: scale(1) } to { transform: scale(10)}}
+      </style>
+    <!-- <img src="icons/Icon-192.png" alt="Loading indicator..." /> -->
+    <img width="45px" height="45px" src="assets/assets/images/loterias_dominicanas_sin_letras_mismo_ancho_largo_redondeada.png" alt="Loading indicator..." />
+  </div>
+
+  <!-- <div class="content">
+    <img width="50px" height="50px" id="imgLoterias"  src="/assets/assets/images/loterias_dominicanas_sin_letras_editada.png" alt="">
+    <!-- <h2>LoteriaApp</h2> -->
+    <!-- <div class="loading-box">
+      <div class="loader"></div>
+    </div> -->
+  </div> -->
+
+<!-- <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-messaging.js"></script> -->
+<script>
+  if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('flutter_service_worker.js?v=1412590146');
+      });
+    }
+    window.addEventListener('load', function() {
+      var loading = document.querySelector('#loading');
+      _flutter.loader.loadEntrypoint({
+        serviceWorker: {
+          serviceWorkerVersion: serviceWorkerVersion,
+        }
+      }).then(function(engineInitializer) {
+        loading.classList.add('main_done');
+        return engineInitializer.initializeEngine();
+      }).then(function(appRunner) {
+        loading.classList.add('init_done');
+        return appRunner.runApp();
+      }).then(function(app) {
+        // Wait a few milliseconds so users can see the "zoooom" animation
+        // before getting rid of the "loading" div.
+        window.setTimeout(function() {
+          loading.remove();
+        }, 200);
+      });
+    });
+
+
+
+    function receivePdf(base64String) {
+      console.log("Recibiendo pdf")
+      // return;
+  // Convertir la cadena base64 a un Blob
+  const byteCharacters = atob(base64String);
+  const byteNumbers = new Array(byteCharacters.length);
+  for (let i = 0; i < byteCharacters.length; i++) {
+    byteNumbers[i] = byteCharacters.charCodeAt(i);
+  }
+  const byteArray = new Uint8Array(byteNumbers);
+  const blob = new Blob([byteArray], { type: 'application/pdf' });
+
+  // Crear una URL para el Blob
+  const blobUrl = URL.createObjectURL(blob);
+
+  // Crear un iframe oculto
+  const iframe = document.createElement('iframe');
+  iframe.style.display = 'none';
+  iframe.src = blobUrl;
+  
+  // Agregar el iframe al DOM
+  document.body.appendChild(iframe);
+
+  // Esperar a que el iframe cargue y luego imprimir
+  iframe.onload = function () {
+    console.log("Index.html iimprimiendo pdf")
+    iframe.contentWindow.print();};
+}
+
+function receiveImage(base64String) {
+  // Crear una URL base64 para la imagen
+  console.log("Recibiendo imagen")
+  const imageUrl = `data:image/png;base64,${base64String}`;
+
+  // buscar iframe por id y eliminarlo si existe
+  var iframeExistente = document.getElementById("iframe-imagen");
+  if (iframeExistente) {
+    document.body.removeChild(iframeExistente);
+  }
+
+  // Crear un iframe oculto
+  const iframe = document.createElement('iframe');
+  iframe.style.display = 'none';
+
+  // id del iframe
+  iframe.id = "iframe-imagen";
+
+  // Agregar el iframe al DOM
+  document.body.appendChild(iframe);
+
+  // Esperar a que el iframe cargue la imagen
+  iframe.onload = function () {
+    console.log("Index.html iimprimiendo Imagen")
+    iframe.contentWindow.print();
+    console.log("Index.html Imagen impresa")
+    // document.body.removeChild(iframe); // Eliminar el iframe después de imprimir
+  };
+
+  // Escribir el contenido HTML con la imagen en el iframe
+  iframe.srcdoc = `
+    <!DOCTYPE html>
+    <html>
+      <body style="margin: 0; padding: 0;">
+        <img src="${imageUrl}" style="width: 100%; height: auto;" />
+      </body>
+    </html>`;
+}
+</script>
+  <script>
+    // importScripts('https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js');
+    // importScripts('https://www.gstatic.com/firebasejs/8.6.1/firebase-messaging.js');
+    //   const firebaseConfig = {
+    //   // apiKey: "your key-EW_U6NZU-A",
+    //   // authDomain: "flutter-notification-tes-fec9d.dasda.com",
+    //   // projectId: "flutter-notification-tes-fec9d",
+    //   // storageBucket: "flutter-dasdadas-tes-fec9d.appspot.com",
+    //   // messagingSenderId: "dasdsa",
+    //   // appId: "1:263307381024:web:dsadads",
+    //   // measurementId: "G-dsadsa"
+    //   apiKey: "AIzaSyBx-v-9Yj1wCxKTCzmO3HLypqFTPIvWbP4",
+    //   authDomain: "loterias-c5cca.firebaseapp.com",
+    //   projectId: "loterias-c5cca",
+    //   storageBucket: "loterias-c5cca.appspot.com",
+    //   messagingSenderId: "553232454336",
+    //   appId: "1:553232454336:web:f0fe67fdc96857baaa5325",
+    //   measurementId: "G-YJJQB6C3Q5"
+    // };
+    //   firebase.initializeApp(firebaseConfig);
+    //   const messaging = firebase.messaging();
+
+    //   /*messaging.onMessage((payload) => {
+    //   console.log('Message received. ', payload);*/
+    //   messaging.onBackgroundMessage(function(payload) {
+    //     console.log('Received background message ', payload);
+
+    //     const notificationTitle = payload.notification.title;
+    //     const notificationOptions = {
+    //       body: payload.notification.body,
+    //     };
+
+    //     self.registration.showNotification(notificationTitle,
+    //       notificationOptions);
+    //   });
+
+    // Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBx-v-9Yj1wCxKTCzmO3HLypqFTPIvWbP4",
+  authDomain: "loterias-c5cca.firebaseapp.com",
+  projectId: "loterias-c5cca",
+  storageBucket: "loterias-c5cca.appspot.com",
+  messagingSenderId: "553232454336",
+  appId: "1:553232454336:web:f0fe67fdc96857baaa5325",
+  measurementId: "G-YJJQB6C3Q5"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+  </script>
+  <!-- This script installs service_worker.js to provide PWA functionality to
+       application. For more information, see:
+       https://developers.google.com/web/fundamentals/primers/service-workers -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('flutter-first-frame', function () {
+        navigator.serviceWorker.register('flutter_service_worker.js');
+        (async () => {
+          const swRegistration = await navigator.serviceWorker.register('/firebase-messaging-sw.js');
+          // var token = getToken(messaging, { vapidKey:  'AIzaSyBx-v-9Yj1wCxKTCzmO3HLypqFTPIvWbP4', serviceWorkerRegistration: swRegistration })
+          // console.log("FirebaseToken: " , token)
+        })();
+      });
+    }
+  </script>
+  <script defer src="sql-wasm.js"></script>
+
+  <script src="main.dart.js?15.0.193" type="application/javascript"></script>
 </body>
 </html>
