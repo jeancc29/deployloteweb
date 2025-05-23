@@ -331,6 +331,16 @@ const analytics = getAnalytics(app);
        https://developers.google.com/web/fundamentals/primers/service-workers -->
   <script>
     if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for(let registration of registrations) {
+          registration.update();
+        }
+      });
+
+      navigator.serviceWorker.addEventListener('controllerchange', function() {
+        window.location.reload();
+      });
+
       window.addEventListener('flutter-first-frame', function () {
         navigator.serviceWorker.register('flutter_service_worker.js');
         (async () => {
@@ -343,6 +353,6 @@ const analytics = getAnalytics(app);
   </script>
   <script defer src="sql-wasm.js"></script>
 
-  <script src="main.dart.js?15.0.190" type="application/javascript"></script>
+  <script src="main.dart.js?15.0.191" type="application/javascript"></script>
 </body>
 </html>
