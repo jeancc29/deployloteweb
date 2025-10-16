@@ -174,7 +174,7 @@
 <script>
   if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
-        navigator.serviceWorker.register('flutter_service_worker.js?v=845323741');
+        navigator.serviceWorker.register('flutter_service_worker.js?v=845323742');
       });
     }
     window.addEventListener('load', function() {
@@ -330,19 +330,19 @@ const analytics = getAnalytics(app);
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
   <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('flutter-first-frame', function () {
-        navigator.serviceWorker.register('flutter_service_worker.js');
-        (async () => {
-          const swRegistration = await navigator.serviceWorker.register('/firebase-messaging-sw.js');
-          // var token = getToken(messaging, { vapidKey:  'AIzaSyBx-v-9Yj1wCxKTCzmO3HLypqFTPIvWbP4', serviceWorkerRegistration: swRegistration })
-          // console.log("FirebaseToken: " , token)
-        })();
-      });
-    }
+    // if ('serviceWorker' in navigator) {
+    //   window.addEventListener('flutter-first-frame', function () {
+    //     navigator.serviceWorker.register('flutter_service_worker.js');
+    //     (async () => {
+    //       const swRegistration = await navigator.serviceWorker.register('/firebase-messaging-sw.js');
+    //       // var token = getToken(messaging, { vapidKey:  'AIzaSyBx-v-9Yj1wCxKTCzmO3HLypqFTPIvWbP4', serviceWorkerRegistration: swRegistration })
+    //       // console.log("FirebaseToken: " , token)
+    //     })();
+    //   });
+    // }
   </script>
   <script defer src="sql-wasm.js"></script>
 
-  <script src="main.dart.js?15.0.196" type="application/javascript"></script>
+  <script src="main.dart.js?15.0.197" type="application/javascript"></script>
 </body>
 </html>
