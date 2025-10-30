@@ -313,7 +313,7 @@ const RESOURCES = {"assets/AssetManifest.bin": "6091772272d7da0e996feed5aa7064e8
 "index.html": "a4996740ef97a59e3056521474924668",
 "/": "a4996740ef97a59e3056521474924668",
 "logo.png": "26f05f1e0855712633f940855df0ada2",
-"main.dart.js": "2842a7e9f16c859cab1c5734e91cb598",
+"main.dart.js": "10b6dacd8be5849ee3aa13bafcc384ea",
 "manifest.json": "8ad841dc3cde908dcdba9a7d498d7e97",
 "sql-wasm.js": "04b960431ad6c0314a115558cff07880",
 "sql-wasm.wasm": "ea7edc8cc0702b48cc93bf41e5b6cc61",
